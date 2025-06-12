@@ -1,0 +1,14 @@
+tsconfig.*
+yarn.*
+.env
+build
+dist
+.github/workflows/*.yml
+.github/**/*.md
+web-build
+credentials
+node_modules
+.well-known
+ios
+android
+e2e/bin

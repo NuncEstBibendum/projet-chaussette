@@ -1,0 +1,19 @@
+{
+  "printWidth": 100,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^hooks/(.*)$",
+    "^assets/(.*)$",
+    "^(constants|helpers)/(.*)$",
+    "^pages/(.*)$",
+    "^components/(.*)$",
+    "^modules/(.*)$",
+    "^types/(.*)$",
+    "^styles/(.*)$",
+    "^[./]",
+    "\\.styles$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "trailingComma": "es5"
+}

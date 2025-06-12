@@ -1,0 +1,50 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": [
+      "es2019",
+      "dom"
+    ],
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "pages/*": [
+        "./src/pages/*"
+      ],
+      "assets/*": [
+        "./src/assets/*"
+      ],
+      "constants/*": [
+        "./src/constants/*"
+      ],
+      "components/*": [
+        "./src/components/*"
+      ],
+      "hooks/*": [
+        "./src/hooks/*"
+      ],
+      "helpers/*": [
+        "./src/helpers/*"
+      ],
+      "modules/*": [
+        "./src/modules/*"
+      ],
+      "styles/*": [
+        "./src/styles/*"
+      ],
+      "types/*": [
+        "./src/types/*"
+      ]
+    },
+    "skipLibCheck": true
+  },
+  "include": [
+    ".",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ],
+  "typeRoots": [
+    "./src/types"
+  ]
+}

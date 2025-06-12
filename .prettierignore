@@ -1,0 +1,9 @@
+tsconfig.*
+yarn.*
+.env
+build
+.eslintrc
+.github
+emailTemplates/*.mjml
+src/generated/prismic.ts
+.currents/*

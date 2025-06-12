@@ -1,0 +1,43 @@
+{
+  "extends": "@react-native",
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.d.ts"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "./tsconfig.json",
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        }
+      }
+    }
+  ],
+  "plugins": ["detox", "@typescript-eslint"],
+  "rules": {
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "import/order": "off",
+    "prettier/prettier": "off",
+    "@typescript-eslint/array-type": "off",
+    "quotes": [
+      "warn",
+      "double",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "comma-dangle": ["error", "only-multiline"],
+    "curly": ["error", "multi-line"],
+    "object-shorthand": ["error", "always"],
+    "react-native/no-inline-styles": 0,
+    "no-shadow": "off",
+    "no-undef": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "dot-notation": "off"
+  },
+  "env": {
+    "jest": true
+  }
+}
