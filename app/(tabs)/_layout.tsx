@@ -7,11 +7,11 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: colors.dark[600],
-          borderTopColor: colors.dark[600],
+          backgroundColor: colors.cream,
+          borderTopColor: colors.purple,
         },
-        tabBarActiveTintColor: colors.gold[400],
-        tabBarInactiveTintColor: colors.beige[200],
+        tabBarActiveTintColor: colors.purple,
+        tabBarInactiveTintColor: colors.purple,
         headerShown: false,
       }}
     >
@@ -23,12 +23,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="Play"
+        name="Achievements"
         options={{
-          title: "Play",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="game-controller" size={size} color={color} />
-          ),
+          title: "Achievements",
+          tabBarIcon: ({ color, size }) => <Ionicons name="trophy" size={size} color={color} />,
         }}
       />
       <Tabs.Screen

@@ -48,27 +48,13 @@ export default function RootLayout() {
               }}
             >
               <Stack.Screen
-                name="index"
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="(screens)/Welcome"
-                options={{
-                  title: "Welcome",
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="(screens)/Auth"
-                options={{
-                  title: "Authentication",
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
                 name="(screens)"
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="(tabs)"
                 options={{
                   headerShown: false,
                 }}

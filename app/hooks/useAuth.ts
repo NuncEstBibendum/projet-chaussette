@@ -37,7 +37,7 @@ const signUp = async (credentials: SignUpCredentials): Promise<AuthResponse> => 
   return response.data;
 };
 
-export const useAuth = () => {
+const useAuth = () => {
   const loginMutation = useMutation<AuthResponse, AxiosError<ErrorResponse>, SignInCredentials>({
     mutationFn: login,
   });
@@ -54,3 +54,5 @@ export const useAuth = () => {
       loginMutation.error?.response?.data?.error || signUpMutation.error?.response?.data?.error,
   };
 };
+
+export default useAuth;

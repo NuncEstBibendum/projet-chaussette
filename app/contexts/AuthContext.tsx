@@ -3,10 +3,16 @@ import { API_URL } from "app/constants/config";
 import { useRouter, useSegments } from "expo-router";
 import { createContext, useContext, useEffect, useState } from "react";
 
+type Child = {
+  id: string;
+  name: string;
+};
+
 type User = {
   id: string;
   username: string;
   email: string;
+  children: Child[];
 };
 
 type AuthContextType = {
@@ -62,7 +68,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function signIn(email: string, password: string) {
     try {
-      // TODO: Replace with actual API call
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -91,8 +96,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     confirmPassword: string
   ) {
     try {
-      // TODO: Replace with actual API call
-      const response = await fetch("http://192.168.50.199:3000/api/auth/signup", {
+      const response = await fetch(`${API_URL}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

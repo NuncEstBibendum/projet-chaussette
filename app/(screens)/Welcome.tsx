@@ -27,7 +27,6 @@ export default function Welcome() {
       if (result?.type === "success") {
         const { authentication } = result;
         console.log("Google Auth Success:", authentication);
-        // TODO: Send token to your backend
         router.replace("/(tabs)/Home");
       }
     } catch (error) {
@@ -47,8 +46,8 @@ export default function Welcome() {
       <View style={styles.overlay} />
       <SafeAreaView style={styles.container}>
         <View style={styles.content}>
-          <Text color={colors.beige[100]} style={styles.title}>
-           Projet Chaussette
+          <Text color={colors.purple} style={styles.title}>
+            Projet Chaussette
           </Text>
           <View style={styles.buttonsContainer}>
             <Button
@@ -65,8 +64,8 @@ export default function Welcome() {
             />
             <View style={styles.divider}>
               <View style={styles.dividerLine} />
-              <Text color={colors.beige[100]} style={styles.dividerText}>
-                or
+              <Text color={colors.purple} style={styles.dividerText}>
+                ou
               </Text>
               <View style={styles.dividerLine} />
             </View>
@@ -85,7 +84,7 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.dark[400],
+    backgroundColor: colors.cream,
   },
   container: {
     flex: 1,
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "120%",
-    backgroundColor: colors.dark[400],
+    backgroundColor: colors.cream,
     opacity: 0.5,
   },
   content: {
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: colors.beige[100],
+    backgroundColor: colors.purple,
     opacity: 0.3,
   },
   dividerText: {

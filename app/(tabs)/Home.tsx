@@ -1,76 +1,75 @@
-import CategoryCard from "app/components/ui/CategoryCard";
 import SafeAreaScrollView from "app/components/ui/SafeAreaScrollView";
 import Text from "app/components/ui/Text";
 import colors from "app/constants/colors";
+import { useAuth } from "app/contexts/AuthContext";
+import useGetChildren from "app/hooks/useGetChildren";
+import useGetLastChildrenAchievements from "app/hooks/useGetLastChildrenAchievements";
+import { TouchableOpacity, View } from "react-native";
 
 export default function Home() {
+  const { user } = useAuth();
+  const { data: children, isLoading: childrenLoading } = useGetChildren();
+  const { data: lastChildrenAchievements, isLoading: lastChildrenAchievementsLoading } =
+    useGetLastChildrenAchievements(user?.id ?? "");
+
+  if (childrenLoading || lastChildrenAchievementsLoading) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
-    <SafeAreaScrollView title="Choose a game mode">
-      <CategoryCard backgroundImage={require("../../assets/images/categories/classic.png")}>
-        <Text
+    <SafeAreaScrollView title="Home">
+      <View style={{ gap: 16 }}>
+        <Text size="large">Bienvenue {user?.username}</Text>
+        <View
           style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            fontFamily: "Beleren",
+            padding: 16,
+            borderWidth: 1,
+            borderColor: colors.purple,
+            gap: 16,
+            borderRadius: 16,
           }}
-          color={colors.beige[200]}
         >
-          Classic
-        </Text>
-      </CategoryCard>
-      <CategoryCard backgroundImage={require("../../assets/images/categories/illustration.png")}>
-        <Text
+          <Text size="medium">Dernières compétences acquises</Text>
+          <View style={{ gap: 8 }}>
+            <View style={{ gap: 8 }}>
+              {lastChildrenAchievements?.map((achievement) => (
+                <View
+                  key={achievement.id}
+                  style={{
+                    gap: 8,
+                    borderWidth: 1,
+                    borderColor: colors.purple,
+                    padding: 8,
+                    borderRadius: 12,
+                    backgroundColor: colors.pink,
+                  }}
+                >
+                  <Text>{achievement.achievement.name}</Text>
+                  <Text>{achievement.achievement.description}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        </View>
+        <View
           style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            fontFamily: "Beleren",
+            padding: 16,
+            borderWidth: 1,
+            borderColor: colors.purple,
+            gap: 16,
+            borderRadius: 16,
           }}
-          color={colors.beige[200]}
         >
-          Illustration
-        </Text>
-      </CategoryCard>
-      <CategoryCard backgroundImage={require("../../assets/images/categories/flavor.png")}>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            fontFamily: "Beleren",
-          }}
-          color={colors.beige[200]}
-        >
-          Flavor text
-        </Text>
-      </CategoryCard>
-      <CategoryCard backgroundImage={require("../../assets/images/categories/artist.png")}>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            fontFamily: "Beleren",
-          }}
-          color={colors.beige[200]}
-        >
-          Find the artist
-        </Text>
-      </CategoryCard>
-      <CategoryCard backgroundImage={require("../../assets/images/categories/survival.png")}>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            fontFamily: "Beleren",
-          }}
-          color={colors.beige[200]}
-        >
-          Survival mode
-        </Text>
-      </CategoryCard>
+          <Text size="medium">Mes enfants</Text>
+          <View style={{ gap: 8 }}>
+            {children?.map((child) => (
+              <TouchableOpacity>
+                <Text>{child.name}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+      </View>
     </SafeAreaScrollView>
   );
 }

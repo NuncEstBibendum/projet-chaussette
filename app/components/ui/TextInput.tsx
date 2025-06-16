@@ -7,36 +7,33 @@ interface CustomTextInputProps extends TextInputProps {
   containerStyle?: object;
 }
 
-export const TextInput: React.FC<CustomTextInputProps> = ({
-  error,
-  containerStyle,
-  style,
-  ...props
-}) => {
+const TextInput: React.FC<CustomTextInputProps> = ({ error, containerStyle, style, ...props }) => {
   return (
     <View style={containerStyle}>
       <RNTextInput
         style={[styles.input, error && styles.errorInput, style]}
-        placeholderTextColor={colors.brown[200]}
+        placeholderTextColor={colors.purple}
         {...props}
       />
     </View>
   );
 };
 
+export default TextInput;
+
 const styles = StyleSheet.create({
   input: {
     height: 48,
     paddingHorizontal: 16,
     borderRadius: 8,
-    backgroundColor: colors.beige[100],
+    backgroundColor: colors.cream,
     borderWidth: 1,
-    borderColor: colors.beige[200],
+    borderColor: colors.purple,
     fontSize: 16,
-    color: colors.dark[400],
+    color: colors.black,
   },
   errorInput: {
-    borderColor: "#ff0000",
-    color: colors.red[400],
+    borderColor: colors.pink,
+    color: colors.pink,
   },
 });

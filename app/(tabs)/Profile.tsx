@@ -1,5 +1,5 @@
 import SafeAreaScrollView from "app/components/ui/SafeAreaScrollView";
-import { TextInput } from "app/components/ui/TextInput";
+import TextInput from "app/components/ui/TextInput";
 import colors from "app/constants/colors";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
@@ -11,7 +11,7 @@ export default function ProfileScreen() {
     <SafeAreaScrollView style={styles.root} title="Profile">
       {user && (
         <View style={styles.userInfo}>
-          <Text style={styles.label}>Username</Text>
+          <Text style={styles.label}>Nom d'utilisateur</Text>
           <TextInput style={styles.value} value={user.username} editable={false} />
 
           <Text style={styles.label}>Email</Text>
@@ -20,7 +20,7 @@ export default function ProfileScreen() {
       )}
 
       <TouchableOpacity style={styles.signOutButton} onPress={signOut}>
-        <Text style={styles.signOutText}>Sign Out</Text>
+        <Text style={styles.signOutText}>Déconnexion</Text>
       </TouchableOpacity>
     </SafeAreaScrollView>
   );
@@ -31,13 +31,13 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   userInfo: {
-    backgroundColor: colors.brown[200],
+    backgroundColor: colors.green,
     padding: 20,
     borderRadius: 8,
     marginBottom: 30,
   },
   label: {
-    color: colors.beige[200],
+    color: colors.purple,
     fontSize: 16,
     marginBottom: 5,
   },
@@ -47,13 +47,13 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   signOutButton: {
-    backgroundColor: colors.red[400],
+    backgroundColor: colors.purple,
     padding: 15,
     borderRadius: 8,
     alignItems: "center",
   },
   signOutText: {
-    color: colors.beige[100],
+    color: colors.cream,
     fontSize: 16,
     fontWeight: "bold",
   },

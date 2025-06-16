@@ -12,7 +12,7 @@ const SafeAreaScrollView = ({
   style?: ViewStyle;
 }) => {
   return (
-    <SafeAreaView style={[{ flex: 1, backgroundColor: colors.dark[600] }, style]}>
+    <SafeAreaView style={[{ flex: 1, backgroundColor: colors.cream }, style]}>
       {title && (
         <Text
           style={{
@@ -21,7 +21,7 @@ const SafeAreaScrollView = ({
             fontFamily: "MTG-Font",
             textAlign: "center",
           }}
-          color={colors.gold[400]}
+          color={colors.purple}
         >
           {title}
         </Text>

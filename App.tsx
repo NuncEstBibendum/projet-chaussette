@@ -68,7 +68,7 @@ const App = () => {
             <Stack.Screen
               name="(screens)/home"
               options={{
-                title: "Demonic Tutor",
+                title: "Home",
                 headerShown: false,
               }}
             />
