@@ -1,10 +1,8 @@
 import colors from "app/constants/colors";
 import { SafeAreaView, ScrollView, ViewStyle } from "react-native";
-import Text from "./Text";
 
 const SafeAreaScrollView = ({
   children,
-  title,
   style,
 }: {
   children: React.ReactNode;
@@ -13,22 +11,7 @@ const SafeAreaScrollView = ({
 }) => {
   return (
     <SafeAreaView style={[{ flex: 1, backgroundColor: colors.cream }, style]}>
-      {title && (
-        <Text
-          style={{
-            fontSize: 18,
-            marginBottom: 16,
-            fontFamily: "MTG-Font",
-            textAlign: "center",
-          }}
-          color={colors.purple}
-        >
-          {title}
-        </Text>
-      )}
-      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 16 }}>
-        {children}
-      </ScrollView>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>{children}</ScrollView>
     </SafeAreaView>
   );
 };

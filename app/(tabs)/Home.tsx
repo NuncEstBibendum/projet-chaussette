@@ -1,5 +1,7 @@
+import Card from "app/components/Card";
 import SafeAreaScrollView from "app/components/ui/SafeAreaScrollView";
 import Text from "app/components/ui/Text";
+import TextInput from "app/components/ui/TextInput";
 import colors from "app/constants/colors";
 import { useAuth } from "app/contexts/AuthContext";
 import useGetChildren from "app/hooks/useGetChildren";
@@ -19,52 +21,67 @@ export default function Home() {
   return (
     <SafeAreaScrollView title="Home">
       <View style={{ gap: 16 }}>
-        <Text size="large">Bienvenue {user?.username}</Text>
         <View
           style={{
+            backgroundColor: colors.darkBlue,
             padding: 16,
-            borderWidth: 1,
-            borderColor: colors.purple,
-            gap: 16,
-            borderRadius: 16,
+            borderBottomLeftRadius: 24,
+            borderBottomRightRadius: 24,
+            borderBottomColor: colors.white,
+            paddingBottom: 82,
           }}
         >
-          <Text size="medium">Dernières compétences acquises</Text>
-          <View style={{ gap: 8 }}>
-            <View style={{ gap: 8 }}>
-              {lastChildrenAchievements?.map((achievement) => (
-                <View
-                  key={achievement.id}
-                  style={{
-                    gap: 8,
-                    borderWidth: 1,
-                    borderColor: colors.purple,
-                    padding: 8,
-                    borderRadius: 12,
-                    backgroundColor: colors.pink,
-                  }}
-                >
-                  <Text>{achievement.achievement.name}</Text>
-                  <Text>{achievement.achievement.description}</Text>
-                </View>
-              ))}
-            </View>
-          </View>
+          <Text size="large" color={colors.white}>
+            Bienvenue,
+          </Text>
+          <Text size="xlarge" style={{ fontWeight: "bold" }} color={colors.white}>
+            {user?.username}
+          </Text>
+          <TextInput placeholder="Rechercher une compétence" style={{ marginVertical: 24 }} />
         </View>
-        <View
-          style={{
-            padding: 16,
-            borderWidth: 1,
-            borderColor: colors.purple,
-            gap: 16,
-            borderRadius: 16,
-          }}
-        >
-          <Text size="medium">Mes enfants</Text>
+        <View style={{ gap: 16, marginTop: -82, paddingHorizontal: 16 }}>
+          <View style={{ gap: 16, flexDirection: "row" }}>
+            <Card backgroundColor={colors.green}>
+              <Text size="large" color={colors.darkBlue} style={{ fontWeight: "bold" }}>
+                Truc cool n°1
+              </Text>
+              <Text size="medium" color={colors.darkBlue}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+              </Text>
+            </Card>
+            <Card backgroundColor={colors.yellow}>
+              <Text size="large" color={colors.darkBlue} style={{ fontWeight: "bold" }}>
+                Truc cool n°2
+              </Text>
+              <Text size="medium" color={colors.darkBlue}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+              </Text>
+            </Card>
+          </View>
+          <Text size="large" color={colors.darkBlue} style={{ fontWeight: "bold" }}>
+            Dernières compétences acquises
+          </Text>
+          <View style={{ gap: 8 }}>
+            {lastChildrenAchievements?.map((achievement) => (
+              <Card key={achievement.id} backgroundColor={colors.blue}>
+                <Text size="medium" color={colors.darkBlue} style={{ fontWeight: "bold" }}>
+                  {achievement.achievement.name}
+                </Text>
+                <Text size="small" color={colors.darkBlue}>
+                  {achievement.achievement.description}
+                </Text>
+              </Card>
+            ))}
+          </View>
+          <Text size="large" color={colors.darkBlue} style={{ fontWeight: "bold" }}>
+            Mes enfants
+          </Text>
           <View style={{ gap: 8 }}>
             {children?.map((child) => (
               <TouchableOpacity>
-                <Text>{child.name}</Text>
+                <Text size="medium" color={colors.darkBlue}>
+                  {child.name}
+                </Text>
               </TouchableOpacity>
             ))}
           </View>

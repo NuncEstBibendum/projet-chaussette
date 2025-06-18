@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   label: {
-    color: colors.purple,
+    color: colors.darkBlue,
     fontSize: 16,
     marginBottom: 5,
   },
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   signOutButton: {
-    backgroundColor: colors.purple,
+    backgroundColor: colors.darkBlue,
     padding: 15,
     borderRadius: 8,
     alignItems: "center",

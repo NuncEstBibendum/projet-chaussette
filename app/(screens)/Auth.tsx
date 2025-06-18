@@ -56,14 +56,14 @@ export default function Auth() {
       <View style={styles.overlay} />
       <SafeAreaView style={styles.container}>
         <Pressable onPress={handleBack} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color={colors.purple} />
+          <Ionicons name="arrow-back" size={24} color={colors.darkBlue} />
         </Pressable>
         <View style={styles.content}>
-          <Text color={colors.purple} style={styles.title}>
+          <Text color={colors.darkBlue} style={styles.title}>
             Projet Chaussette
           </Text>
           <View style={styles.form}>
-            <Text color={colors.purple} style={styles.subtitle}>
+            <Text color={colors.darkBlue} style={styles.subtitle}>
               {mode === "signin" ? "Connectez-vous à votre compte" : "Créez un nouveau compte"}
             </Text>
             {mode === "signup" && (
@@ -100,7 +100,7 @@ export default function Auth() {
               />
             )}
             {errorMessage && (
-              <Text style={styles.errorText} color={colors.purple}>
+              <Text style={styles.errorText} color={colors.darkBlue}>
                 {errorMessage}
               </Text>
             )}
@@ -109,17 +109,17 @@ export default function Auth() {
               label={mode === "signin" ? "Se connecter" : "Créer un compte"}
               disabled={isLoading}
             />
-            {isLoading && <ActivityIndicator color={colors.purple} style={styles.loader} />}
+            {isLoading && <ActivityIndicator color={colors.darkBlue} style={styles.loader} />}
             <View style={styles.divider}>
               <View style={styles.dividerLine} />
-              <Text color={colors.purple} style={styles.dividerText}>
+              <Text color={colors.darkBlue} style={styles.dividerText}>
                 or
               </Text>
               <View style={styles.dividerLine} />
             </View>
             <View style={styles.toggleContainer}>
               <Pressable onPress={toggleMode}>
-                <Text style={styles.toggleText} color={colors.purple}>
+                <Text style={styles.toggleText} color={colors.darkBlue}>
                   {mode === "signin" ? "Vous n'avez pas de compte ?" : "Vous avez déjà un compte ?"}
                 </Text>
               </Pressable>
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.cream,
     padding: 24,
     borderRadius: 12,
-    shadowColor: colors.purple,
+    shadowColor: colors.darkBlue,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   toggleText: {
-    color: colors.purple,
+    color: colors.darkBlue,
   },
   errorText: {
     textAlign: "center",
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: colors.purple,
+    backgroundColor: colors.darkBlue,
     opacity: 0.3,
   },
   dividerText: {

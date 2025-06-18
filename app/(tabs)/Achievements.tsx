@@ -18,10 +18,10 @@ export default function Achievements() {
                 style={{
                   gap: 8,
                   borderWidth: 1,
-                  borderColor: colors.purple,
+                  borderColor: colors.darkBlue,
                   padding: 8,
                   borderRadius: 12,
-                  backgroundColor: colors.pink,
+                  backgroundColor: colors.blue,
                 }}
               >
                 <Text>{achievement.name}</Text>

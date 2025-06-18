@@ -46,7 +46,7 @@ export default function Welcome() {
       <View style={styles.overlay} />
       <SafeAreaView style={styles.container}>
         <View style={styles.content}>
-          <Text color={colors.purple} style={styles.title}>
+          <Text color={colors.darkBlue} style={styles.title}>
             Projet Chaussette
           </Text>
           <View style={styles.buttonsContainer}>
@@ -64,7 +64,7 @@ export default function Welcome() {
             />
             <View style={styles.divider}>
               <View style={styles.dividerLine} />
-              <Text color={colors.purple} style={styles.dividerText}>
+              <Text color={colors.darkBlue} style={styles.dividerText}>
                 ou
               </Text>
               <View style={styles.dividerLine} />
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: colors.purple,
+    backgroundColor: colors.darkBlue,
     opacity: 0.3,
   },
   dividerText: {

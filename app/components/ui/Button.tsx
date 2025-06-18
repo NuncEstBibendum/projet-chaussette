@@ -27,7 +27,7 @@ const Button = ({
     >
       <View style={styles.buttonContent}>
         {leftIcon && <View style={styles.icon}>{leftIcon}</View>}
-        <Text color={disabled ? colors.purple : colors.white}>{label}</Text>
+        <Text color={disabled ? colors.darkBlue : colors.white}>{label}</Text>
         {rightIcon && <View style={styles.icon}>{rightIcon}</View>}
       </View>
     </Pressable>
@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   primary: {
-    backgroundColor: colors.purple,
+    backgroundColor: colors.darkBlue,
   },
   secondary: {
-    backgroundColor: colors.pink,
+    backgroundColor: colors.blue,
   },
   disabled: {
-    backgroundColor: colors.pink,
+    backgroundColor: colors.blue,
     opacity: 0.5,
   },
   icon: {

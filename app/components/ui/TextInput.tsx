@@ -5,14 +5,22 @@ import { TextInput as RNTextInput, StyleSheet, TextInputProps, View } from "reac
 interface CustomTextInputProps extends TextInputProps {
   error?: boolean;
   containerStyle?: object;
+  leftIcon?: React.ReactNode;
 }
 
-const TextInput: React.FC<CustomTextInputProps> = ({ error, containerStyle, style, ...props }) => {
+const TextInput: React.FC<CustomTextInputProps> = ({
+  error,
+  containerStyle,
+  style,
+  leftIcon,
+  ...props
+}) => {
   return (
     <View style={containerStyle}>
+      {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
       <RNTextInput
         style={[styles.input, error && styles.errorInput, style]}
-        placeholderTextColor={colors.purple}
+        placeholderTextColor={colors.darkBlue}
         {...props}
       />
     </View>
@@ -22,18 +30,24 @@ const TextInput: React.FC<CustomTextInputProps> = ({ error, containerStyle, styl
 export default TextInput;
 
 const styles = StyleSheet.create({
+  leftIcon: {
+    position: "absolute",
+    left: 16,
+    top: 0,
+    bottom: 0,
+  },
   input: {
     height: 48,
     paddingHorizontal: 16,
     borderRadius: 8,
     backgroundColor: colors.cream,
     borderWidth: 1,
-    borderColor: colors.purple,
+    borderColor: colors.darkBlue,
     fontSize: 16,
     color: colors.black,
   },
   errorInput: {
-    borderColor: colors.pink,
-    color: colors.pink,
+    borderColor: colors.blue,
+    color: colors.blue,
   },
 });

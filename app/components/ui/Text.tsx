@@ -5,7 +5,7 @@ interface Props {
   children: React.ReactNode;
   color?: string;
   style?: TextStyle;
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "xlarge";
 }
 
 const Text = ({ children, color, style, size = "small" }: Props) => {
@@ -14,7 +14,10 @@ const Text = ({ children, color, style, size = "small" }: Props) => {
       style={[
         styles.text,
         style,
-        { color, fontSize: size === "small" ? 14 : size === "medium" ? 24 : 32 },
+        {
+          color,
+          fontSize: size === "small" ? 14 : size === "medium" ? 18 : size === "large" ? 24 : 32,
+        },
       ]}
     >
       {children}
