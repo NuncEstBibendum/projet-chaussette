@@ -1,11 +1,17 @@
 import Button from "app/components/ui/Button";
 import Text from "app/components/ui/Text";
-import Select from "app/components/ui/Select";
 import colors from "app/constants/colors";
-import useGetAchievements from "app/hooks/useGetAchievements";
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Alert, ScrollView } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import TextInput from "./ui/TextInput";
+import useSearchAchievements from "app/hooks/useSearchAchievements";
+
+type Achievement = {
+  id: string;
+  name: string;
+  description: string;
+};
 
 interface AddAchievementFormProps {
   onSubmit: (data: { achievementId: string; acquiredAt?: Date; masteredAt?: Date }) => void;
@@ -18,15 +24,16 @@ const AddAchievementForm: React.FC<AddAchievementFormProps> = ({
   onCancel,
   isLoading = false,
 }) => {
-  const { data: achievements, isLoading: achievementsLoading } = useGetAchievements();
-  const [selectedAchievementId, setSelectedAchievementId] = useState<string>("");
+  const [search, setSearch] = useState("");
+  const { data: searchAchievements, isLoading: searchAchievementsLoading } =
+    useSearchAchievements(search);
+  const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
   const [acquiredAt, setAcquiredAt] = useState<Date | undefined>(undefined);
   const [masteredAt, setMasteredAt] = useState<Date | undefined>(undefined);
   const [showAcquiredDatePicker, setShowAcquiredDatePicker] = useState(false);
   const [showMasteredDatePicker, setShowMasteredDatePicker] = useState(false);
-
   const handleSubmit = () => {
-    if (!selectedAchievementId) {
+    if (!selectedAchievement) {
       Alert.alert("Erreur", "Veuillez sélectionner un achievement");
       return;
     }
@@ -40,7 +47,7 @@ const AddAchievementForm: React.FC<AddAchievementFormProps> = ({
     }
 
     onSubmit({
-      achievementId: selectedAchievementId,
+      achievementId: selectedAchievement.id,
       acquiredAt,
       masteredAt,
     });
@@ -68,13 +75,6 @@ const AddAchievementForm: React.FC<AddAchievementFormProps> = ({
     });
   };
 
-  const achievementOptions =
-    achievements?.map((achievement) => ({
-      value: achievement.id,
-      label: achievement.name,
-      description: achievement.description,
-    })) || [];
-
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.form}>
@@ -82,13 +82,40 @@ const AddAchievementForm: React.FC<AddAchievementFormProps> = ({
           <Text size="medium" color={colors.darkBlue} style={styles.label}>
             Compétence
           </Text>
-          <Select
-            value={selectedAchievementId}
-            onValueChange={setSelectedAchievementId}
-            placeholder="Sélectionner une compétence"
-            options={achievementOptions}
-            disabled={achievementsLoading}
+          <TextInput
+            placeholder="Chercher une compétence"
+            value={search}
+            onChangeText={setSearch}
           />
+          {search && searchAchievementsLoading && <Text>Chargement...</Text>}
+          {search && searchAchievements && searchAchievements.length > 0 && (
+            <ScrollView style={styles.achievementOptionsContainer}>
+              {searchAchievements.map((achievement) => (
+                <TouchableOpacity
+                  key={achievement.id}
+                  onPress={() => {
+                    setSelectedAchievement(achievement);
+                    setSearch("");
+                  }}
+                  style={styles.achievementOption}
+                >
+                  <Text size="medium" color={colors.darkBlue}>
+                    {achievement.name}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          )}
+          {selectedAchievement && (
+            <View style={styles.selectedAchievement}>
+              <Text size="medium" color={colors.darkBlue} style={styles.selectedLabel}>
+                {selectedAchievement.name}
+              </Text>
+              <Text size="small" color={colors.darkBlue}>
+                {selectedAchievement.description}
+              </Text>
+            </View>
+          )}
         </View>
         <View style={styles.field}>
           <Text size="medium" color={colors.darkBlue} style={styles.label}>
@@ -150,7 +177,7 @@ const AddAchievementForm: React.FC<AddAchievementFormProps> = ({
         <Button
           label="Ajouter la compétence"
           onPress={handleSubmit}
-          disabled={isLoading || !selectedAchievementId}
+          disabled={isLoading || !selectedAchievement}
         />
       </View>
     </ScrollView>
@@ -166,9 +193,26 @@ const styles = StyleSheet.create({
   },
   field: {
     gap: 8,
+    position: "relative",
   },
   label: {
     fontWeight: "bold",
+  },
+  achievementOptionsContainer: {
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: colors.darkBlue,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+    position: "absolute",
+    top: 70,
+    zIndex: 10,
+    backgroundColor: colors.cream,
+    width: "100%",
+  },
+  achievementOption: {
+    padding: 12,
   },
   selectedAchievement: {
     padding: 12,
