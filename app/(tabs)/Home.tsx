@@ -2,21 +2,37 @@ import Card from "app/components/Card";
 import SafeAreaScrollView from "app/components/ui/SafeAreaScrollView";
 import Text from "app/components/ui/Text";
 import TextInput from "app/components/ui/TextInput";
+import Modal from "app/components/ui/Modal";
+import AddChildForm from "app/components/AddChildForm";
 import colors from "app/constants/colors";
 import { useAuth } from "app/contexts/AuthContext";
+import useCreateChildren from "app/hooks/useCreateChildren";
 import useGetChildren from "app/hooks/useGetChildren";
 import useGetLastChildrenAchievements from "app/hooks/useGetLastChildrenAchievements";
 import { TouchableOpacity, View } from "react-native";
+import { useState } from "react";
 
 export default function Home() {
   const { user } = useAuth();
   const { data: children, isLoading: childrenLoading } = useGetChildren();
   const { data: lastChildrenAchievements, isLoading: lastChildrenAchievementsLoading } =
     useGetLastChildrenAchievements(user?.id ?? "");
+  const { mutate: createChildren, isPending: isCreating } = useCreateChildren();
+  const [showAddChildModal, setShowAddChildModal] = useState(false);
 
   if (childrenLoading || lastChildrenAchievementsLoading) {
     return <Text>Loading...</Text>;
   }
+
+  const handleAddChild = (data: { name: string; birthDate: Date; gender: "male" | "female" }) => {
+    createChildren({
+      userId: user?.id ?? "",
+      name: data.name,
+      birthDate: data.birthDate,
+      gender: data.gender,
+    });
+    setShowAddChildModal(false);
+  };
 
   return (
     <SafeAreaScrollView title="Home">
@@ -73,12 +89,33 @@ export default function Home() {
               </Card>
             ))}
           </View>
-          <Text size="large" color={colors.darkBlue} style={{ fontWeight: "bold" }}>
-            Mes enfants
-          </Text>
+          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Text size="large" color={colors.darkBlue} style={{ fontWeight: "bold" }}>
+              Mes enfants
+            </Text>
+            <TouchableOpacity
+              style={{
+                backgroundColor: colors.green,
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                borderRadius: 16,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              onPress={() => setShowAddChildModal(true)}
+            >
+              <Text
+                size="medium"
+                color={colors.darkBlue}
+                style={{ margin: 0, padding: 0, lineHeight: 25 }}
+              >
+                Ajouter un enfant +
+              </Text>
+            </TouchableOpacity>
+          </View>
           <View style={{ gap: 8 }}>
             {children?.map((child) => (
-              <TouchableOpacity>
+              <TouchableOpacity key={child.id}>
                 <Text size="medium" color={colors.darkBlue}>
                   {child.name}
                 </Text>
@@ -87,6 +124,18 @@ export default function Home() {
           </View>
         </View>
       </View>
+
+      <Modal
+        visible={showAddChildModal}
+        onClose={() => setShowAddChildModal(false)}
+        title="Ajouter un enfant"
+      >
+        <AddChildForm
+          onSubmit={handleAddChild}
+          onCancel={() => setShowAddChildModal(false)}
+          isLoading={isCreating}
+        />
+      </Modal>
     </SafeAreaScrollView>
   );
 }
