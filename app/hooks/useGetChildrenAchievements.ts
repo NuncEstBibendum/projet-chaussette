@@ -6,6 +6,8 @@ type ChildrenAchievement = {
   id: string;
   childId: string;
   achievementId: string;
+  acquiredAt?: string;
+  masteredAt?: string;
   createdAt: string;
   updatedAt: string;
   achievement: Achievement;

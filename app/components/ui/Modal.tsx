@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.cream,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    minHeight: Dimensions.get("window").height * 0.6,
+    minHeight: Dimensions.get("window").height * 0.8,
     maxHeight: Dimensions.get("window").height * 0.9,
   },
   header: {

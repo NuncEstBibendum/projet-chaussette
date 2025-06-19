@@ -11,9 +11,11 @@ import useGetChildren from "app/hooks/useGetChildren";
 import useGetLastChildrenAchievements from "app/hooks/useGetLastChildrenAchievements";
 import { TouchableOpacity, View } from "react-native";
 import { useState } from "react";
+import { useRouter } from "expo-router";
 
 export default function Home() {
   const { user } = useAuth();
+  const router = useRouter();
   const { data: children, isLoading: childrenLoading } = useGetChildren();
   const { data: lastChildrenAchievements, isLoading: lastChildrenAchievementsLoading } =
     useGetLastChildrenAchievements(user?.id ?? "");
@@ -32,6 +34,12 @@ export default function Home() {
       gender: data.gender,
     });
     setShowAddChildModal(false);
+  };
+
+  const handleChildPress = (childId: string, childName: string) => {
+    router.push(
+      `/(screens)/ChildDetails?childId=${childId}&childName=${encodeURIComponent(childName)}`
+    );
   };
 
   return (
@@ -115,8 +123,18 @@ export default function Home() {
           </View>
           <View style={{ gap: 8 }}>
             {children?.map((child) => (
-              <TouchableOpacity key={child.id}>
-                <Text size="medium" color={colors.darkBlue}>
+              <TouchableOpacity
+                key={child.id}
+                onPress={() => handleChildPress(child.id, child.name)}
+                style={{
+                  padding: 12,
+                  backgroundColor: colors.cream,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: colors.darkBlue,
+                }}
+              >
+                <Text size="medium" color={colors.darkBlue} style={{ fontWeight: "bold" }}>
                   {child.name}
                 </Text>
               </TouchableOpacity>

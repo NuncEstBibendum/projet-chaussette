@@ -45,10 +45,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const inAuthGroup = segments[0] === "(screens)";
     const inTabsGroup = segments[0] === "(tabs)";
+    const currentScreen = segments[1];
+
+    // Allow navigation to ChildDetails even when user is authenticated
+    const isChildDetailsScreen = currentScreen === "ChildDetails";
 
     if (!user && !inAuthGroup) {
       router.replace("/(screens)/Welcome");
-    } else if (user && !inTabsGroup) {
+    } else if (user && !inTabsGroup && !isChildDetailsScreen) {
+      // Only redirect to Home if not on ChildDetails screen
       router.replace("/(tabs)/Home");
     }
   }, [user, segments, isLoading]);

@@ -21,6 +21,12 @@ export default function ScreensLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="ChildDetails"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }
